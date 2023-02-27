@@ -1,8 +1,8 @@
 import React from "react";
 import Workout from "~/components/workout";
 import { api } from "~/utils/api";
-import Progress from "~/components/progress";
 import { signIn, signOut, useSession } from "next-auth/react";
+import DailyProgress from "~/components/dailyProgress";
 
 function HomePage() {
 
@@ -11,27 +11,11 @@ function HomePage() {
   const { data: workoutSessions } = api.workoutSession.getTodaySessions.useQuery();
 
 
-
-
-  function getProgress(workoutType: string) {
-    if (workoutSessions) {
-
-      return workoutSessions.filter((session) => session.workoutType === workoutType)
-        .reduce((acc: number, cur) => (acc + cur.amount), 0);
-    } else {
-      return 0
-    }
-
-  }
-
   return (
     <div className="h-screen flex justify-center bg-gray-600">
       <div className="flex w-1/2 flex-col align-middle">
-        <h1 className="text-4xl text-center">One Punch Challenge</h1>
         <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            Hello
-          </p>
+          <h1 className="text-4xl text-center">One Punch Challenge</h1>
           <AuthShowcase />
         </div>
         {
@@ -51,9 +35,7 @@ function HomePage() {
                 {
 
                   workoutSessions.length &&
-                  workouts.map(workout => (
-                    <Progress key={workout} workout={workout} progress={getProgress(workout)} goal={100} />
-                  ))
+                  <DailyProgress workouts={workouts} workoutSessions={workoutSessions}></DailyProgress>
                 }
               </div>
             </div>
@@ -68,7 +50,7 @@ function HomePage() {
 
 export default HomePage;
 
-  const AuthShowcase: React.FC = () => {
+const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
 
   return (
