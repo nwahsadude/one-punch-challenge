@@ -1,6 +1,5 @@
 import React from "react";
 import Workout from "~/components/workout";
-import { api } from "~/utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
 import DailyProgress from "~/components/dailyProgress";
 
@@ -8,7 +7,7 @@ function HomePage() {
 
   const workouts = ["Pushups", "Situps", "Squats", "Running"];
 
-  const { data: workoutSessions } = api.workoutSession.getTodaySessions.useQuery();
+  const { data: sessionData } = useSession();
 
 
   return (
@@ -19,7 +18,7 @@ function HomePage() {
           <AuthShowcase />
         </div>
         {
-          workoutSessions &&
+          sessionData?.user &&
           <div className="flex w-full">
             <div className="flex-1 border p-2">
               <div>
@@ -33,9 +32,7 @@ function HomePage() {
             <div className="flex-1 border p-2">
               <div>
                 {
-
-                  workoutSessions.length &&
-                  <DailyProgress workouts={workouts} workoutSessions={workoutSessions}></DailyProgress>
+                  <DailyProgress workouts={workouts}></DailyProgress>
                 }
               </div>
             </div>
