@@ -41,6 +41,7 @@ function Workout({ workout }: PropsWithoutRef<{ workout: string }>) {
             setDateEnd(null);
             setAmount('0')
             void utils.workoutSession.getTodaySessions.invalidate();
+            void utils.workoutSession.getOthersSessions.invalidate();
           }
         }
       );

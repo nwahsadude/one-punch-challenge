@@ -2,6 +2,7 @@ import React from "react";
 import Workout from "~/components/workout";
 import { signIn, signOut, useSession } from "next-auth/react";
 import DailyProgress from "~/components/dailyProgress";
+import OthersProgress from "~/components/othersProgress";
 
 function HomePage() {
 
@@ -12,8 +13,8 @@ function HomePage() {
 
   return (
     <div className="h-screen flex justify-center bg-gray-600">
-      <div className="flex w-1/2 flex-col align-middle">
-        <div className="flex flex-col items-center gap-2">
+      <div className="flex w-full flex-col align-middle">
+        <div className="flex flex-col items-center gap-2 pb-2">
           <h1 className="text-4xl text-center">One Punch Challenge</h1>
           <AuthShowcase />
         </div>
@@ -36,7 +37,9 @@ function HomePage() {
                 }
               </div>
             </div>
-            <div className="flex-1 border p-2"> others progress</div>
+            <div className="flex-1 border p-2">
+              <OthersProgress/>
+            </div>
           </div>
         }
 

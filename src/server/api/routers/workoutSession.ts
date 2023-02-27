@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { prisma } from "~/server/db";
 
 
 export const workoutSessionRouter = createTRPCRouter({
@@ -32,6 +33,33 @@ export const workoutSessionRouter = createTRPCRouter({
           },
           userId: {
             equals: session.user.id
+          }
+        }
+      });
+    }),
+
+  getOthersSessions: protectedProcedure
+    .input(z.string())
+    .query(({ input }) => {
+      const lastWeek = new Date()
+      // add 7 days to the current date
+      lastWeek.setDate(new Date().getDate() - 7)
+
+
+      return prisma.workoutSession.findMany({
+        where: {
+          workoutType: {
+            equals: input
+          },
+          dateTimeCreated: {
+            gte: lastWeek
+          },
+        },
+        include: {
+          user: {
+            select: {
+              name: true
+            }
           }
         }
       });
