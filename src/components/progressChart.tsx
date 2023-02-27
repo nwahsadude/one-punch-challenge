@@ -1,6 +1,7 @@
 import React, { PropsWithoutRef } from "react";
 import { api } from "~/utils/api";
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryTooltip } from "victory";
+import { WorkoutSession } from ".prisma/client";
 
 function ProgressChart({ workout }: PropsWithoutRef<{ workout: string }>) {
 
@@ -9,35 +10,30 @@ function ProgressChart({ workout }: PropsWithoutRef<{ workout: string }>) {
   if (!data) return (<div>Loading...</div>);
 
 
-  let chartData = [];
+  const prepData = (data: (WorkoutSession & { user: { name: string | null } })[]) => {
 
-  const prepData = () => {
-    chartData = data.reduce((acc, cur) => {
-      const key = `${cur.dateTimeCreated.getDate()}-${cur.dateTimeCreated.getMonth()}-${cur.dateTimeCreated.getFullYear()}-${cur.userId}`;
-      const userKey = `${cur.userId}`;
+    return data.reduce((acc, cur) => {
+      const date = cur.dateTimeCreated.toLocaleDateString();
+      const existingTotalAmount = acc.find(total => total.userId === cur.userId && total.date === date);
 
-      if (!acc[userKey]) {
-        acc[userKey] = {};
-      }
-
-      if (!acc[userKey][key]) {
-        acc[userKey][key] = {
-          name: cur.user.name,
+      if (existingTotalAmount) {
+        existingTotalAmount.totalAmount += cur.amount;
+      } else {
+        acc.push({
           userId: cur.userId,
-          totalAmount: 0,
-          date: `${cur.dateTimeCreated.getDate()}-${cur.dateTimeCreated.getMonth()}-${cur.dateTimeCreated.getFullYear()}`,
-          values: [],
-          label: cur.user.name
-        };
+          label: `${cur.user.name || ""} - ${cur.amount}`,
+          user: cur.user.name || "",
+          date: date,
+          totalAmount: cur.amount
+        });
       }
-      acc[userKey][key].totalAmount += cur.amount;
-      acc[userKey][key].values.push(cur.amount);
+
       return acc;
-    }, {} );
+    }, [] as { userId: string, user: string, label: string, date: string, totalAmount: number }[]);
+
   };
 
-  prepData();
-
+  const chartData = prepData(data);
 
   return (
     <div>
@@ -46,10 +42,9 @@ function ProgressChart({ workout }: PropsWithoutRef<{ workout: string }>) {
 
           {
             chartData &&
-            Object.values(chartData).map((d) => {
-              console.log(d);
+            chartData.map((d) => {
               return (
-                <VictoryBar labelComponent={<VictoryTooltip />} label={workout} key={d.name} data={Object.values(d)}
+                <VictoryBar labelComponent={<VictoryTooltip />} key={d.user} data={chartData}
                             x={"date"} y={"totalAmount"} />);
             })
 
