@@ -12,8 +12,8 @@ function HomePage() {
 
 
   return (
-    <div className="h-screen flex justify-center bg-gray-600">
-      <div className="flex w-full flex-col align-middle">
+    <div className="h-screen w-screen flex justify-center bg-gray-600">
+      <div className="flex w-3/4 flex-col align-middle">
         <div className="flex flex-col items-center gap-2 pb-2">
           <h1 className="text-4xl text-center">One Punch Challenge</h1>
           <AuthShowcase />
