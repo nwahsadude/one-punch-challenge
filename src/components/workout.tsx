@@ -63,7 +63,7 @@ function Workout({ workout }: PropsWithoutRef<{ workout: string }>) {
           <div className="pb-2"></div>
         </div>
         <div className="px-4 mb-2 text-xl">
-          <span> Hours: {hours} </span><span>Minutes: {minutes} </span><span>Seconds: {seconds} </span>
+          <span>Seconds: {seconds} </span><span>Minutes: {minutes} </span><span> Hours: {hours} </span>
         </div>
         <div className="flex w-full justify-between pl-4 pr-4">
           <button type="button"
