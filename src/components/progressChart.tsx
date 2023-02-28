@@ -2,12 +2,13 @@ import React, { PropsWithoutRef } from "react";
 import { api } from "~/utils/api";
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryTooltip } from "victory";
 import { WorkoutSession } from ".prisma/client";
+import LoadingSpinner from "~/components/loadingSpinner";
 
 function ProgressChart({ workout }: PropsWithoutRef<{ workout: string }>) {
 
   const { data } = api.workoutSession.getOthersSessions.useQuery(workout);
 
-  if (!data) return (<div>Loading...</div>);
+  if (!data) return (<LoadingSpinner />);
 
 
   const prepData = (data: (WorkoutSession & { user: { name: string | null } })[]) => {
