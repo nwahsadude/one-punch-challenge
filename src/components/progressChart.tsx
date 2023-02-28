@@ -1,7 +1,7 @@
-import React, { PropsWithoutRef } from "react";
+import React, { type PropsWithoutRef } from "react";
 import { api } from "~/utils/api";
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryTooltip } from "victory";
-import { WorkoutSession } from ".prisma/client";
+import { type WorkoutSession } from ".prisma/client";
 import LoadingSpinner from "~/components/loadingSpinner";
 
 function ProgressChart({ workout }: PropsWithoutRef<{ workout: string }>) {
