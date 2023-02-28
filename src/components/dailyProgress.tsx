@@ -1,6 +1,7 @@
 import React, { type PropsWithoutRef } from "react";
 import ProgressBar from "~/components/progressBar";
 import { api } from "~/utils/api";
+import LoadingSpinner from "~/components/loadingSpinner";
 
 function DailyProgress({
                          workouts
@@ -8,7 +9,7 @@ function DailyProgress({
 
   const { data: workoutSessions } = api.workoutSession.getTodaySessions.useQuery();
 
-  if (!workoutSessions) return (<div>loading...</div>);
+  if (!workoutSessions) return (<LoadingSpinner loadingText={"Loading progress"} />);
 
   function getProgress(workoutType: string) {
     if (workoutSessions) {
