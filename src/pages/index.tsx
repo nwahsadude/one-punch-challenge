@@ -11,14 +11,15 @@ const bangers = Bangers({ subsets: ["latin"], weight: "400" });
 function HomePage() {
   const workouts = ["Pushups", "Situps", "Squats", "Running"];
 
-  const { data: sessionData } = useSession();
+  const { data: sessionData, status: sessionStatus } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!sessionData?.user) {
+    if (sessionStatus === 'unauthenticated') {
       router.push("/welcome");
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionStatus]);
 
   return (
     <div

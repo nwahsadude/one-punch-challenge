@@ -29,15 +29,15 @@ export default WelcomePage;
 
 
 const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
+  const { data: sessionData, status: sessionStatus  } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (sessionData?.user) {
+    if (sessionStatus === 'authenticated') {
       router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionData]);
+  }, [sessionStatus]);
 
 
   return (
