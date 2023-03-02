@@ -51,7 +51,7 @@ function Workout({ workout }: PropsWithoutRef<{ workout: string }>) {
   };
 
   return (
-    <div className="pb-2">
+    <div className="pt-4">
       <h1 className="text-2xl text-center border-black border-y-2 bg-gray-600">{workout}</h1>
       <div className="flex flex-col place-items-center">
         <div className="w-full flex gap-2 px-4 py-4 justify-center items-center">
