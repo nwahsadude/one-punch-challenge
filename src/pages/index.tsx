@@ -24,11 +24,10 @@ function HomePage() {
   return (
     <div className={bangers.className}>
       <div className="h-screen w-screen flex justify-center bg-gray-600">
-        <div className="flex w-3/4 flex-col align-middle">
+        <div className="flex w-3/4 flex-col align-middle mt-4">
           <div className="flex justify-center items-center justify-between gap-2 pb-2">
             <h1 className="text-4xl text-center">One Punch Challenge</h1>
-            <div className="flex gap-4">
-
+            <div className="flex gap-4 items-center">
               <p className="text-center text-2xl text-white">
                 {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
               </p>
