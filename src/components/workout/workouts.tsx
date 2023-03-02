@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Workout from "~/components/workout";
+import Workout from "~/components/workout/workout";
 
 const Workouts: React.FC = () => {
   const workouts = ["Pushups", "Situps", "Squats", "Running"];

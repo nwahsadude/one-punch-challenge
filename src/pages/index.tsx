@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Workout from "~/components/workout";
 import { signIn, signOut, useSession } from "next-auth/react";
 import DailyProgress from "~/components/dailyProgress";
 import OthersProgress from "~/components/othersProgress";
