@@ -29,7 +29,7 @@ function DailyProgress({
 
       {workouts.map(workout => (
         <div key={workout} className="border-black border-b-2 pt-2 pb-2">
-          <h1 className="text-2xl text-center pb-1">{workout}</h1>
+          <h1 className="text-2xl text-center pb-1 text-white">{workout}</h1>
           {workoutSessions.length && <ProgressBar workout={workout} progress={getProgress(workout)} goal={100} />}
 
         </div>
