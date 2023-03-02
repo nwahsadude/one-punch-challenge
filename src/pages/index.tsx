@@ -22,7 +22,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div className={bangers.className} style={{ backgroundImage: "url(/background.jpg)", width: '100%', height: '100%'}}>
+    <div className={bangers.className} style={{ backgroundImage: "url(/background.jpg)", width: '100%', height: '100%',backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <div className="h-screen w-screen flex justify-center">
         <div className="flex w-3/4 flex-col align-middle mt-4">
           <div className="flex justify-center items-center justify-between gap-2 pb-2">
