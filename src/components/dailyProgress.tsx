@@ -23,7 +23,9 @@ function DailyProgress({
 
   return (
     <div>
-      <h1 className="text-center text-2xl bg-gray-600 border-black border-b-2 py-2">Daily Progress</h1>
+      <h1 className="text-center text-2xl bg-gray-600 border-black border-b-2 py-2 text-white">Daily Progress</h1>
+
+      <div className="px-4">
 
       {workouts.map(workout => (
         <div key={workout} className="border-black border-b-2 pt-2 pb-2">
@@ -32,6 +34,7 @@ function DailyProgress({
 
         </div>
       ))}
+      </div>
     </div>
   );
 }

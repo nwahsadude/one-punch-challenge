@@ -55,7 +55,7 @@ function Workout({ workout }: PropsWithoutRef<{ workout: string }>) {
       <h1 className="text-2xl text-center border-black border-y-2 bg-gray-600">{workout}</h1>
       <div className="flex flex-col place-items-center">
         <div className="w-full flex gap-2 px-4 py-4 justify-center items-center">
-          <label htmlFor="amount" className="mb-2 font-medium text-white">Amount</label>
+          <label htmlFor="amount" className="mb-2 font-medium text-white">{workout}</label>
           <input name="amount" id="amount" type="number"
                  value={amount}
                  onChange={(e) => setAmount(e.target.value)}

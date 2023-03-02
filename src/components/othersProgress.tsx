@@ -11,11 +11,11 @@ function OthersProgress() {
 
   return (
     <div>
-      <h1 className="border-b-2 border-black bg-gray-600 py-2 text-center text-2xl">
+      <h1 className="border-b-2 border-black bg-gray-600 py-2 text-center text-2xl text-white">
         Other&apos;s Weekly Progress
       </h1>
       <div>
-        <ul className="flex justify-center border-b border-gray-200 text-center text-sm font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400">
+        <ul className="flex justify-center text-center text-sm font-medium text-white">
           {workouts.map((workout) => {
             return (
               <li key={workout} className="mr-2">
@@ -23,9 +23,9 @@ function OthersProgress() {
                   onClick={() => handleTabClick(workout)}
                   className={` ${
                     workout === activeTab
-                      ? "active dark:bg-gray-800 dark:text-blue-500"
-                      : ""
-                  } inline-block rounded-b-lg bg-gray-100 px-3 py-2 text-blue-600 hover:bg-gray-50 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300`}
+                      ? "active bg-red-600"
+                      : "bg-red-900"
+                  } inline-block rounded-b-lg px-3 py-2 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 `}
                 >
                   {workout}
                 </span>
