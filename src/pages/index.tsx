@@ -1,48 +1,72 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Workout from "~/components/workout";
 import { signIn, signOut, useSession } from "next-auth/react";
 import DailyProgress from "~/components/dailyProgress";
 import OthersProgress from "~/components/othersProgress";
+import { useRouter } from "next/navigation";
+import { Bangers } from "@next/font/google";
+
+const bangers = Bangers({ subsets: ["latin"], weight: "400" });
 
 function HomePage() {
 
   const workouts = ["Pushups", "Situps", "Squats", "Running"];
 
   const { data: sessionData } = useSession();
+  const router = useRouter();
 
+  useEffect(() => {
+    if (!sessionData?.user) {
+      router.push("/welcome");
+    }
+  }, []);
 
   return (
-    <div className="h-screen w-screen flex justify-center bg-gray-600">
-      <div className="flex w-3/4 flex-col align-middle">
-        <div className="flex flex-col items-center gap-2 pb-2">
-          <h1 className="text-4xl text-center">One Punch Challenge</h1>
-          <AuthShowcase />
-        </div>
-        {
-          sessionData?.user &&
-          <div className="flex w-full">
-            <div className="flex-1 border p-2">
-              <div>
-                {
-                  workouts.map(workout => (
-                    <Workout key={workout} workout={workout} />
-                  ))
-                }
-              </div>
-            </div>
-            <div className="flex-1 border p-2">
-              <div>
-                {
-                  <DailyProgress workouts={workouts}></DailyProgress>
-                }
-              </div>
-            </div>
-            <div className="flex-1 border p-2">
-              <OthersProgress/>
+    <div className={bangers.className}>
+      <div className="h-screen w-screen flex justify-center bg-gray-600">
+        <div className="flex w-3/4 flex-col align-middle">
+          <div className="flex justify-center items-center justify-between gap-2 pb-2">
+            <h1 className="text-4xl text-center">One Punch Challenge</h1>
+            <div className="flex gap-4">
+
+              <p className="text-center text-2xl text-white">
+                {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
+              </p>
+              <button
+                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-full transition-colors duration-200"
+                onClick={sessionData ? () => void signOut() : () => void signIn()}
+              >
+                {sessionData ? "Sign out" : "Sign in"}
+              </button>
+
             </div>
           </div>
-        }
+          {
+            sessionData?.user &&
+            <div className="flex w-full">
+              <div className="flex-1 border p-2">
+                <div>
+                  {
+                    workouts.map(workout => (
+                      <Workout key={workout} workout={workout} />
+                    ))
+                  }
+                </div>
+              </div>
+              <div className="flex-1 border p-2">
+                <div>
+                  {
+                    <DailyProgress workouts={workouts}></DailyProgress>
+                  }
+                </div>
+              </div>
+              <div className="flex-1 border p-2">
+                <OthersProgress />
+              </div>
+            </div>
+          }
 
+        </div>
       </div>
     </div>
   );
@@ -50,20 +74,3 @@ function HomePage() {
 
 export default HomePage;
 
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-};
