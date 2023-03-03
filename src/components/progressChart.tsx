@@ -89,6 +89,11 @@ function ProgressChart({ workout }: PropsWithoutRef<{ workout: string }>) {
 
   const chartData = prepData(data);
 
+  if (chartData.length === 0)
+    return (
+      <p className="pt-8 text-center text-white"> No progress has been made</p>
+    );
+
   return (
     <div className="block h-40 w-full pt-5">
       <Chart
