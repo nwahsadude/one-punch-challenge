@@ -64,7 +64,7 @@ function Workout({ workout }: PropsWithoutRef<{ workout: string }>) {
         <div className="px-4 mb-2 text-xl text-white">
           <span>Seconds: {seconds} </span><span>Minutes: {minutes} </span><span> Hours: {hours} </span>
         </div>
-        <div className="flex w-full justify-between pl-4 pr-4">
+        <div className="flex w-full justify-between pl-4 pr-4 pb-4">
           <button type="button"
                   disabled={isRunning}
                   onClick={dateStart && !isRunning ? handleReset : handleStart}
