@@ -28,7 +28,7 @@ function WelcomePage() {
       }}
     >
       <div className="flex h-screen items-center justify-center">
-        <div className="h-auto w-1/2 rounded-lg bg-gray-700 p-10 shadow-md">
+        <div className="h-auto w-3/4 md:w-1/2 rounded-lg bg-gray-700 p-10 shadow-md">
           <h2 className="mb-6 text-center text-2xl font-bold tracking-wider text-white">
             Welcome to the Greatest Workout Routine in the World!
           </h2>
