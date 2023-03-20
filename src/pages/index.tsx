@@ -35,11 +35,11 @@ function HomePage() {
       </div>
       <div className={`${bangers.className} relative`}>
         <div className="flex items-center justify-center justify-between gap-2 px-4 pb-2 pt-4">
-          <h1 className="whitespace-nowrap text-4xl text-white">
+          <h1 className="text-4xl text-white">
             One Punch Challenge
           </h1>
           <div className="flex items-center gap-4">
-            <p className="text-center text-2xl text-white">
+            <p className="text-center text-2xl text-white hidden sm:block">
               {sessionData && (
                 <span>Logged in as {sessionData.user?.name}</span>
               )}
