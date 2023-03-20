@@ -5,6 +5,7 @@ import OthersProgress from "~/components/othersProgress";
 import { useRouter } from "next/navigation";
 import { Bangers } from "@next/font/google";
 import Workouts from "~/components/workout/workouts";
+import Image from "next/image";
 
 const bangers = Bangers({ subsets: ["latin"], weight: "400" });
 
@@ -22,15 +23,16 @@ function HomePage() {
   }, [sessionStatus]);
 
   return (
-    <div
-      className="w-screen h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: "url(/background.jpg)",
-      }}
-    >
-      <div className={bangers.className}>
-        <div className="flex items-center justify-center justify-between gap-2 pb-2 px-4 pt-4">
-          <h1 className="text-4xl text-white whitespace-nowrap">
+    <>
+      <Image
+        src={"/background.jpg"}
+        alt={"Background image"}
+        fill
+        className="z-0 bg-cover bg-center"
+      />
+      <div className={`${bangers.className} z-10 relative`}>
+        <div className="flex items-center justify-center justify-between gap-2 px-4 pb-2 pt-4">
+          <h1 className="whitespace-nowrap text-4xl text-white">
             One Punch Challenge
           </h1>
           <div className="flex items-center gap-4">
@@ -40,7 +42,7 @@ function HomePage() {
               )}
             </p>
             <button
-              className="rounded bg-red-600 py-2 px-4 text-white transition-colors duration-200 hover:bg-red-700 whitespace-nowrap"
+              className="whitespace-nowrap rounded bg-red-600 py-2 px-4 text-white transition-colors duration-200 hover:bg-red-700"
               onClick={sessionData ? () => void signOut() : () => void signIn()}
             >
               {sessionData ? "Sign out" : "Sign in"}
@@ -59,7 +61,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
