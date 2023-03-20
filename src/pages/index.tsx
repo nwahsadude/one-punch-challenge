@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import React, { useEffect } from "react";
+import { useSession } from "next-auth/react";
 import DailyProgress from "~/components/dailyProgress";
 import OthersProgress from "~/components/othersProgress";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ const bangers = Bangers({ subsets: ["latin"], weight: "400" });
 function HomePage() {
   const workouts = ["Pushups", "Situps", "Squats", "Running"];
 
-  const { status: sessionStatus } = useSession();
+  const { data: sessionData, status: sessionStatus } = useSession();
   const router = useRouter();
 
   useEffect(() => {
@@ -22,6 +22,10 @@ function HomePage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionStatus]);
+
+  if (!sessionData) {
+    return null;
+  }
 
   return (
     <>

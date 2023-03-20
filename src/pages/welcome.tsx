@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { signIn, useSession } from "next-auth/react";
 import { Bangers } from "@next/font/google";
 import { useRouter } from "next/navigation";
@@ -10,12 +10,16 @@ function WelcomePage() {
   const { status: sessionStatus } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      router.push("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionStatus]);
+  // useEffect(() => {
+  //   if (sessionStatus === "authenticated") {
+  //     router.push("/");
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [sessionStatus]);
+
+  const handleLogin = async (provider: "discord" | "google") => {
+    await signIn(provider, { callbackUrl: "/" });
+  };
 
   return (
     <div className={bangers.className}>
@@ -43,13 +47,13 @@ function WelcomePage() {
             <div className="flex justify-center gap-4">
               <button
                 className="rounded-md bg-blue-600 py-2 px-4 text-white shadow-md transition duration-200 hover:bg-blue-700"
-                onClick={() => void signIn("discord")}
+                onClick={() => void handleLogin("discord")}
               >
                 Login with Discord
               </button>
               <button
                 className="rounded-md bg-red-600 py-2 px-4 text-white shadow-md transition duration-200 hover:bg-red-700"
-                onClick={() => void signIn("google")}
+                onClick={() => void handleLogin("google")}
               >
                 Login with Google
               </button>
