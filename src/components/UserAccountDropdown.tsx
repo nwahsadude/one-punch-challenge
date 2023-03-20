@@ -48,7 +48,7 @@ function UserAccountDropdown() {
           </p>
           <a
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
-            onClick={void handleSignOut}
+            onClick={() => void handleSignOut()}
           >
             Sign Out
           </a>
