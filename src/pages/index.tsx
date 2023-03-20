@@ -24,13 +24,16 @@ function HomePage() {
 
   return (
     <>
-      <Image
-        src={"/background.jpg"}
-        alt={"Background image"}
-        fill
-        className="z-0 bg-cover bg-center"
-      />
-      <div className={`${bangers.className} z-10 relative`}>
+      <div className="fixed h-screen w-screen overflow-hidden">
+        <Image
+          src={"/background.jpg"}
+          alt={"Background image"}
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+      <div className={`${bangers.className} relative`}>
         <div className="flex items-center justify-center justify-between gap-2 px-4 pb-2 pt-4">
           <h1 className="whitespace-nowrap text-4xl text-white">
             One Punch Challenge

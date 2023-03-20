@@ -20,12 +20,15 @@ function WelcomePage() {
   return (
     <div className={bangers.className}>
       <div>
-        <Image
-          src={"/background.jpg"}
-          alt={"Background image"}
-          fill
-          className="z-0 bg-cover bg-center"
-        />
+        <div className="fixed h-screen w-screen overflow-hidden">
+          <Image
+            src={"/background.jpg"}
+            alt={"Background image"}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
         <div className="relative z-10 flex h-screen items-center justify-center">
           <div className="h-auto w-3/4 rounded-lg bg-gray-700 p-10 shadow-md md:w-1/2">
             <h2 className="mb-6 text-center text-2xl font-bold tracking-wider text-white">
