@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import DailyProgress from "~/components/dailyProgress";
 import OthersProgress from "~/components/othersProgress";
@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import { Bangers } from "@next/font/google";
 import Workouts from "~/components/workout/workouts";
 import Image from "next/image";
+import UserAccountDropdown from "~/components/UserAccountDropdown";
 
 const bangers = Bangers({ subsets: ["latin"], weight: "400" });
 
 function HomePage() {
   const workouts = ["Pushups", "Situps", "Squats", "Running"];
 
-  const { data: sessionData, status: sessionStatus } = useSession();
+  const { status: sessionStatus } = useSession();
   const router = useRouter();
 
   useEffect(() => {
@@ -36,19 +37,7 @@ function HomePage() {
       <div className={`${bangers.className} relative`}>
         <div className="flex items-center justify-center justify-between gap-2 px-4 pb-2 pt-4">
           <h1 className="text-4xl text-white">One Punch Challenge</h1>
-          <div className="flex items-center gap-4">
-            <p className="hidden text-center text-2xl text-white sm:block">
-              {sessionData && (
-                <span>Logged in as {sessionData.user?.name}</span>
-              )}
-            </p>
-            <button
-              className="whitespace-nowrap rounded bg-red-600 py-2 px-4 text-white transition-colors duration-200 hover:bg-red-700"
-              onClick={sessionData ? () => void signOut() : () => void signIn()}
-            >
-              {sessionData ? "Sign out" : "Sign in"}
-            </button>
-          </div>
+          <UserAccountDropdown />
         </div>
         <div className="flex flex-col flex-wrap px-4 md:flex-row md:justify-center">
           <div className="flex-1 border bg-gray-700">
