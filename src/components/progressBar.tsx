@@ -5,7 +5,6 @@ function ProgressBar({
   goal,
 }: PropsWithoutRef<{ workout: string; progress: number; goal: number }>) {
   const percentage = Math.floor((progress / goal) * 100);
-  console.log(percentage)
   return (
     <div className="h-6 w-full rounded-full bg-gray-200 dark:bg-gray-700">
       <div
